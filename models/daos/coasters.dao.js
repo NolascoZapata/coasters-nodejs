@@ -29,7 +29,7 @@ class CoastersDao extends MongoDBContainer {
     async getCoasterById(id){
       try {
           const coaster = await this.getById(id)
-          if (!order) {
+          if (!coaster) {
               const errorMessage = `Coaster with id  "${id}" does not exists`;
               throw new Error(JSON.stringify(errorMessage));
           } else {
