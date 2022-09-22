@@ -10,9 +10,10 @@ app.use(cors())
 require('dotenv').config();
 
 (async()=>{
+    
     await mongoose
         .connect(`mongodb+srv://NolascoZapata:${process.env.DB_PASSWORD}@backend-coderhouse.0dkdf.mongodb.net/${process.env.DATABASE}?retryWrites=true&w=majority`)
-        .then(()=>console.log(`Conectado a ${process.env.DATABASE}`))}
+        .then(()=>console.log(`Connected to ${process.env.DATABASE}`))}
 )()
 
 app.use(express.json());
@@ -24,4 +25,4 @@ app.use(express.urlencoded({
 app.use('/api',apiRoutes)
 
 
-app.listen(PORT,()=>console.log(`Server escuchando ${PORT}`))
+app.listen(PORT,()=>console.log(`Server listening on port ${PORT}`))
