@@ -14,7 +14,7 @@ const getCoastersController = async (req,res,next)=>{
 const getCoasterByIdController = async (req, res, next) => {
     try {
     const id = req.params.id
-    const coaster = await coasters.getOrderById(id);
+    const coaster = await coasters.getCoasterById(id);
     console.log('[GET]==> Get Coaster By Id');
     res.status(200).json(coaster)
 } catch (error) {
