@@ -2,11 +2,14 @@ const express = require('express');
 const app = express()
 const cors = require('cors')
 const mongoose = require('mongoose')
+const compression=require('compression')
+
 const apiRoutes = require('./routes/index.routers')
 
 const PORT = process.env.PORT | 8080 
 
 app.use(cors())
+app.use(compression())
 require('dotenv').config();
 
 (async()=>{
