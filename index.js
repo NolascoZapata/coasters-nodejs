@@ -9,7 +9,6 @@ const apiRoutes = require('./routes/index.routers')
 const PORT = process.env.PORT | 8080
 
 app.use(cors())
-app.use(compression())
 require('dotenv').config();
 
 (async () => {
@@ -24,22 +23,9 @@ app.use(express.urlencoded({
     extended: true
 }));
 
-//CORS
-
-// const whitelist = ['https://roller-tickets.netlify.app/']
-// const corsOptions = {
-//     origin: (origin, callback) => {
-//         if (whitelist.indexOf(origin) !== -1) {
-//             callback(null, true)
-//         } else {
-//             callback(new Error())
-//         }
-//     }
-// }
-
 
 //Routes
-app.use('/api', apiRoutes)
+app.use('/api',compression, apiRoutes)
 
 
 app.listen(PORT, () => console.log(`Server listening on port ${PORT}`))
