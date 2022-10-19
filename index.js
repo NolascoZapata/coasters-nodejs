@@ -24,8 +24,10 @@ app.use(express.urlencoded({
 }));
 
 
+
 //Routes
-app.use('/api',compression, apiRoutes)
+app.use(compression())
+app.use('/api', apiRoutes)
 
 
 app.listen(PORT, () => console.log(`Server listening on port ${PORT}`))
