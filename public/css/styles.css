@@ -60,6 +60,45 @@ main{
   align-items: center;
   height: 70vh;
 }
+
+main .login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+main .login label{
+  margin-top: 10vh;
+  color: #f8efd9;
+  font-size: 30px;
+  text-align: center;
+}
+main .login input{
+  color: #f8efd9;
+  font-size: 20px;
+  text-align: center;
+  background-color: #2927277d;
+  border: none;
+}
+main .login .btn{
+  color: #f8efd9;
+  border: #f8efd9 solid 1px;
+  margin: 3%;
+}
+main .login .btn:hover{
+  background-color: #f8efd9;
+  color: #1e1d1d7d;
+  font-weight: 500;
+}
+
+main span a,main a{
+  text-decoration: none;
+  color: #f8efd9;
+}
+main span a:hover,main a:hover{
+  text-decoration: underline;
+  color: #f8efd9;
+
+}
 .card{
   background-color: #2927277d;
   width: 50%;
@@ -107,8 +146,9 @@ main{
 }
 
 
-
-table {
+/* Orders page */
+.table {
+  margin-top: 1vh;
   overflow-y: auto;
   display: inline-block;
   height: 70vh;
@@ -119,6 +159,7 @@ table {
   scrollbar-width: 10px;
   border-collapse: collapse;
   border-color: none;
+  width: 95%;
 
 }
 table thead tr {
@@ -131,15 +172,16 @@ table thead tr {
 table td, table th{
   color: #f8efd9;
   border-color: #1f1e1e;
+  text-align: center;
 }
-table::-webkit-scrollbar {
+table::-webkit-scrollbar,.messages-list ul::-webkit-scrollbar {
   width: 10px;
 }
-table::-webkit-scrollbar-track {
+table::-webkit-scrollbar-track, .messages-list ul::-webkit-scrollbar-track{
   background-color: #2927277d
 }
-table::-webkit-scrollbar-thumb {
-  box-shadow: inset 0 0 6px #1f1e1e;
+table::-webkit-scrollbar-thumb, .messages-list ul::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 6px #1b1a1a;
 }
 
 .accordion-item{
@@ -154,8 +196,10 @@ td .accordion-button{
   padding: 0.5rem ;
   background-color: #2927277d; 
   color: #f8efd9;
+  text-align: center;
 }
 td .accordion-button:not(.collapsed) {
+  text-align: center;
   color: #f8efd9; 
   background-color: #2927277d;
   box-shadow: inset 0 -1px 0 rgb(0 0 0 / 13%);
@@ -163,9 +207,96 @@ td .accordion-button:not(.collapsed) {
 
 td .accordion-body{
   background-color: #2927277d; 
+  padding: 0.5rem ;
+}
+td .accordion-body ul{
+  margin: 1px;
+  padding: 1px;
+}
+
+
+/* Messages page */
+.messages-box {
+  display: flex;
+  height: 70vh;
+
+}
+.messages-box .messages-list {
+  background-color: #2927277d;
+  width: 45vw;
+  border: 1px solid #6c757d;
+  
+  margin: 2.5vw;
+
+}
+.messages-box .messages-list ul {
+  margin: 10px;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+.messages-box .messages-list li {
+  list-style: none;
+  
+}
+.messages-box .messages-list li:hover {
+  border: 1px solid #6c757d;
+}
+
+.messages-box .messages-content {
+  width: 45vw;
+  display: flex;
+  margin: 2.5vw;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.messages-box .messages-content .chat {
+  background-color: #2927277d;
+  height: 100%;
+  border: 1px solid #6c757d;
+  padding: 3%;
+}
+.messages-box .messages-content .chat .chat-user{
+  color: #f8efd9;
+  text-align: center;
+
+}
+.messages-box .messages-content .chat p{
+  color: #f8efd9;
+  text-align: justify;
+  padding: 3%;
+
+}
+.messages-box .messages-content .chat button {
+  margin: 5px;
+  color: #f8efd9;
+  border: #f8efd9 solid 1px;
+  background-color: #2927277d;
+
+}
+.messages-box .messages-content .chat button:hover {
+  background-color: #f8efd9;
+  color: #1e1d1d7d;
+  font-weight: 400;
 
 }
 
+/* .messages-box .messages-content .input-send {
+  margin: 5px;
+}
+.messages-box .messages-content .input-send input {
+  width: fit-content;
+  background-color: #2927277d;
+  border: 1px solid #6c757d;
+}
+.messages-box .messages-content .input-send button {
+  margin: 5px;
+  color: #f8efd9;
+  border: #f8efd9 solid 1px;
+
+} */
+
+/* ------- */
 footer{
   display: flex;
   justify-content: end;

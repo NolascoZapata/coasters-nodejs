@@ -1,17 +1,23 @@
-const ordersTableBody = document.getElementById('ordersTableBody')
+const ordersTableBody = document.getElementById('ordersTableBody');
+const messagesList = document.getElementById('list');
 let orders = []
-const loadOrders = ()=>{
-  fetch('/api/orders')
+let messages=[]
+
+
+const checkResult = ()=> (parseInt(document.getElementById('result').value)===25) ? location.replace('/home') : alert(`Try again`)
+
+
+const loadData =(array,db_data,func)=>{
+  fetch(`/api/${db_data}`)
   .then(res=>res.json())
-  .then(res=>orders=[...res])
+  .then(res=>array=[...res])
   .catch(err=>console.log(err.message))
-  .then(()=>renderOrders(orders))
+  .then(()=>func(array))
 }
 
 const renderOrders = (ordersArray) =>{
   let row = ordersArray.map(order=>
     `
-    
     <tr>
             <td>${order.buyer.name}</td>
             <td>${order.buyer.email}</td>
@@ -27,8 +33,8 @@ const renderOrders = (ordersArray) =>{
                       <ul>
                       ${order.item.map(item=> 
                               `
-                              <li class="d-flex">
-                                <img src="${item.item.imageUrl}" width="5px"  alt="">
+                              <li class="d-flex justify-content-around">
+                                <img src="${item.item.imageUrl}" width="30px"  alt="">
                                 <span>${item.item.title}</span>
                                 <span>Quantity ${item.itemQty}</span>
                                 <span>Date: ${item.date}</span>
@@ -42,9 +48,9 @@ const renderOrders = (ordersArray) =>{
                 </div>
             </td>
             <td>${order.total}</td>
-            <td>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-square-fill" viewBox="0 0 16 16">
-                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"/>
+            <td onclick=deleteDocument("orders","${order._id}")>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
               </svg>
             </td>
           </tr>
@@ -61,5 +67,41 @@ const renderOrders = (ordersArray) =>{
     ordersTableBody.innerHTML = respStringAll
 }
 }
+const renderMessages=(messagesArray)=>{
+  let messagesHtml = messagesArray.map(message =>
+    `
+      <li onClick="showMessages('${message._id}')">
+        <h6 class="text-start">${message.email}</h6>
+      </li>
+          `
+  )
+  let respStringAll = ''
+  for (let i = 0; i < messagesHtml.length; i++) {
+    respStringAll = respStringAll + messagesHtml[i]
+  }
+  messagesList.innerHTML = respStringAll
+}
+const showMessages = (id) => {
+  let chatHtml = document.getElementById('chat')
+  console.log();
+  fetch(`/api/messages/${id}`)
+    .then(response => response.json())
+    .then(data => {
+      chatHtml.innerHTML = 
+                  `
+                    <h4 class="chat-user">${data.email}</h4>
+                    <p>${data.message}</p>
+                    <button class="btn" onClick=deleteDocument("messages","${data._id}")>Delete message</button>
+                    `
+    })
+}
 
-loadOrders()
+const deleteDocument = (route,id)=>{
+  fetch(`/api/${route}/${id}`,{
+    method: "DELETE"
+  })
+  .then(res=>res.json())
+  .catch(error=>console.log(error))
+  .then(()=>location.reload())
+
+}

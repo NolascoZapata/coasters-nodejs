@@ -35,6 +35,9 @@ app.use(compression())
 app.use('/api', apiRoutes)
 
 app.get('/',(req,res)=>{
+    res.render('pages/login')
+})
+app.get('/home',(req,res)=>{
     res.render('pages/home')
 })
 
